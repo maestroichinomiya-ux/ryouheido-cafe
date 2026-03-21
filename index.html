@@ -733,6 +733,163 @@ body {
 
 /* ─── ADDITIONAL ANIMATIONS ─── */
 
+/* ── 水平スクロール進捗バー（ページ上部） ── */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+  z-index: 9999;
+  transition: width .08s linear;
+}
+
+/* ── カスタムカーソル ── */
+.cursor-dot {
+  position: fixed;
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width .2s ease, height .2s ease, background .2s ease;
+  opacity: 0;
+}
+.cursor-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1.5px solid rgba(168,136,58,.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  transition: width .3s ease, height .3s ease, border-color .25s ease;
+  opacity: 0;
+}
+body.cursor-hover .cursor-dot { width: 10px; height: 10px; background: var(--gold-lt); }
+body.cursor-hover .cursor-ring { width: 50px; height: 50px; border-color: var(--gold); }
+
+/* ── テキストマスクリビール ── */
+.js-ready .text-reveal { overflow: hidden; position: relative; }
+.js-ready .text-reveal::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--bg-alt);
+  transform: scaleX(1); transform-origin: left;
+  transition: transform .85s cubic-bezier(.77,0,.18,1);
+}
+.js-ready .text-reveal.visible::after {
+  transform: scaleX(0); transform-origin: right;
+}
+
+/* ── Featureシマー ── */
+.sweets-feature-img::before {
+  content: ''; position: absolute;
+  top: 0; left: -100%; width: 55%; height: 100%;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.07) 50%, transparent 60%);
+  z-index: 2; pointer-events: none;
+  animation: shimmer 7s 1.5s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%,60%,100% { left: -100%; }
+  30% { left: 120%; }
+}
+
+/* ── ツアープラン上部ライン ── */
+.tour-plan { position: relative; }
+.tour-plan::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  height: 2px; width: 0;
+  transition: width .45s ease;
+}
+.tour-plan.plan-a::before { background: var(--gold); }
+.tour-plan.plan-b::before { background: var(--gold-lt); }
+.tour-plan:hover::before { width: 100%; }
+
+/* ── Stat数字ホバー ── */
+.stat-num { display: inline-block; transition: color .3s ease, transform .3s ease; }
+.stat-item:hover .stat-num { color: var(--gold-lt); transform: scale(1.07); }
+
+/* ── スイーツカード：画像ホバーオーバーレイ ── */
+.sweets-card-img { position: relative; }
+.sweets-card-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(36,28,18,.5) 0%, transparent 55%);
+  opacity: 0; transition: opacity .35s ease;
+}
+.sweets-card:hover .sweets-card-img::after { opacity: 1; }
+
+/* ── Concept画像オーバーレイ ── */
+.concept-img-main::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: rgba(36,28,18,.2);
+  transition: opacity .7s ease;
+}
+.concept-img-main:hover::before { opacity: 0; }
+
+/* ── ナビロゴ縮小 ── */
+nav.scrolled .logo-img { height: 34px !important; }
+
+/* ── アクセスマップホバー ── */
+.access-map-wrap { transition: box-shadow .4s ease; }
+.access-map-wrap:hover { box-shadow: 0 14px 40px rgba(100,80,50,.15); }
+
+/* ── コンタクトカードホバー ── */
+.contact-card { transition: box-shadow .35s ease, transform .35s ease; }
+.contact-card:hover { box-shadow: 0 16px 48px rgba(100,80,50,.12); transform: translateY(-2px); }
+
+/* ── Heroスクロールインジケーター：バウンス ── */
+.hero-scroll { animation: bounceDown 2.2s ease-in-out infinite; }
+@keyframes bounceDown {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(7px); }
+}
+
+/* ── 体験ボタン波紋 ── */
+.exp-btn { position: relative; overflow: hidden; }
+.exp-btn::before {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  width: 0; height: 0; border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  transform: translate(-50%,-50%);
+  transition: width .55s ease, height .55s ease, opacity .55s ease; opacity: 0;
+}
+.exp-btn:hover::before { width: 220px; height: 220px; opacity: 1; }
+
+/* ── 装飾：浮かぶ薄い円 ── */
+#sweets { position: relative; overflow: hidden; }
+#sweets::before {
+  content: ''; position: absolute;
+  width: 380px; height: 380px; border-radius: 50%;
+  border: 1px solid rgba(168,136,58,.055);
+  top: -80px; right: -80px; pointer-events: none;
+  animation: floatCircle 14s ease-in-out infinite alternate;
+}
+#sweets::after {
+  content: ''; position: absolute;
+  width: 240px; height: 240px; border-radius: 50%;
+  border: 1px solid rgba(168,136,58,.04);
+  bottom: -50px; left: -50px; pointer-events: none;
+  animation: floatCircle 18s ease-in-out infinite alternate-reverse;
+}
+@keyframes floatCircle {
+  from { transform: translate(0,0) rotate(0deg); }
+  to   { transform: translate(18px,18px) rotate(25deg); }
+}
+#experience { position: relative; overflow: hidden; }
+#experience::after {
+  content: ''; position: absolute;
+  width: 280px; height: 280px; border-radius: 50%;
+  border: 1px solid rgba(168,136,58,.045);
+  top: 50%; right: -60px; transform: translateY(-50%);
+  pointer-events: none;
+  animation: floatCircle 11s ease-in-out infinite alternate;
+}
+
+/* ── フッターブランド名ホバー ── */
+.foot-brand { transition: color .3s ease, letter-spacing .3s ease; cursor: default; }
+.foot-brand:hover { color: rgba(200,160,70,.7); letter-spacing: .16em; }
+
 /* ── Hero タイトル：文字が一行ずつ遅延してフェードイン ── */
 .hero-eyebrow { animation-delay: .4s !important; }
 .hero-title   { animation-delay: .65s !important; }
@@ -897,9 +1054,190 @@ body {
 .nav-logo:hover .logo-img {
   opacity: .75 !important;
 }
+
+/* ═══════════════════════════════════════════
+   EXTRA ANIMATIONS v2
+═══════════════════════════════════════════ */
+
+/* ── カスタムカーソル（PC only） ── */
+@media (pointer: fine) {
+  body { cursor: none; }
+  a, button, .btn, .sweets-card, .exp-item, .nav-links a { cursor: none; }
+}
+#cursor {
+  position: fixed; top: 0; left: 0; z-index: 99999;
+  pointer-events: none;
+}
+#cursor-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gold);
+  position: absolute; transform: translate(-50%,-50%);
+  transition: width .2s ease, height .2s ease;
+  will-change: transform;
+}
+#cursor-ring {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  position: absolute; transform: translate(-50%,-50%);
+  opacity: .55;
+  transition: width .28s ease, height .28s ease, opacity .28s ease;
+  will-change: transform;
+}
+#cursor.hover #cursor-dot  { width: 10px; height: 10px; }
+#cursor.hover #cursor-ring { width: 46px; height: 46px; opacity: .85; }
+#cursor.click #cursor-dot  { transform: translate(-50%,-50%) scale(.7); }
+
+/* ── ページプログレスバー ── */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px; z-index: 9998; pointer-events: none;
+  background: linear-gradient(90deg, var(--gold), var(--gold-lt));
+  width: 0%; transition: width .12s linear;
+  transform-origin: left;
+}
+
+/* ── 浮遊する栗シルエット ── */
+.float-deco {
+  position: absolute; pointer-events: none; z-index: 0;
+  will-change: transform;
+}
+@keyframes floatA {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  35%      { transform: translateY(-22px) rotate(5deg); }
+  70%      { transform: translateY(-10px) rotate(-3deg); }
+}
+@keyframes floatB {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  45%      { transform: translateY(-16px) rotate(-6deg); }
+  75%      { transform: translateY(-26px) rotate(4deg); }
+}
+@keyframes floatC {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  55%      { transform: translateY(-12px) rotate(7deg); }
+}
+.float-deco.fa { animation: floatA 7.5s ease-in-out infinite; }
+.float-deco.fb { animation: floatB 9.2s ease-in-out infinite .6s; }
+.float-deco.fc { animation: floatC 6.3s ease-in-out infinite 1.4s; }
+
+/* ── シマーライン（スイーツFeature） ── */
+.sweets-feature-img { overflow: hidden; }
+.sweets-feature-img::before {
+  content: '';
+  position: absolute; top: 0; left: -120%; z-index: 2;
+  width: 55%; height: 100%;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.13) 50%, transparent 65%);
+  animation: shimmer 5s ease-in-out infinite 1.5s;
+  pointer-events: none;
+}
+@keyframes shimmer {
+  0%,55% { left: -120%; }
+  80%    { left: 130%; }
+  100%   { left: 130%; }
+}
+
+/* ── スイーツカード ゴールドグラデ オーバーレイ ── */
+.sweets-card-img::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(160,120,48,.4) 0%, transparent 55%);
+  opacity: 0; transition: opacity .4s ease;
+}
+.sweets-card:hover .sweets-card-img::before { opacity: 1; }
+
+/* ── exp-spec：左からスライドイン ── */
+.exp-spec {
+  opacity: 0; transform: translateX(-10px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.exp-item.visible .exp-spec:nth-child(1) { opacity:1; transform:none; transition-delay:.28s; }
+.exp-item.visible .exp-spec:nth-child(2) { opacity:1; transform:none; transition-delay:.4s; }
+.exp-item.visible .exp-spec:nth-child(3) { opacity:1; transform:none; transition-delay:.52s; }
+
+/* ── ツアー時間数字 hover scale ── */
+.tour-plan-time { display: inline-block; transition: transform .3s ease, color .3s ease; }
+.tour-plan:hover .tour-plan-time { transform: scale(1.07); color: var(--gold-lt); }
+
+/* ── セクション ornament（中央飾り線） ── */
+.section-ornament {
+  display: flex; align-items: center; gap: .9rem;
+  max-width: 160px; margin: 0 auto 2rem;
+}
+.section-ornament::before,
+.section-ornament::after {
+  content: ''; flex: 1; height: 1px; background: var(--gold);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform .9s .15s cubic-bezier(.4,0,.2,1);
+}
+.js-ready .section-ornament { }
+.js-ready .section-ornament.visible::before,
+.js-ready .section-ornament.visible::after { transform: scaleX(1); }
+.section-ornament-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0;
+  transform: scale(0);
+  transition: transform .4s .5s cubic-bezier(.34,1.56,.64,1);
+}
+.js-ready .section-ornament.visible .section-ornament-dot { transform: scale(1); }
+
+/* ── Contact タイトルのアンダーラインアニメ ── */
+#contact .title-serif em {
+  position: relative; display: inline-block;
+}
+#contact .title-serif em::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: glowLine 3.5s ease-in-out infinite;
+}
+@keyframes glowLine {
+  0%,100% { opacity: .25; transform: scaleX(.5); }
+  50%      { opacity: .9; transform: scaleX(1); }
+}
+
+/* ── アクセスエリア画像 hover zoom ── */
+.access-map-wrap { overflow: hidden; }
+.access-map-wrap .map-placeholder {
+  transition: transform 1s cubic-bezier(.4,0,.2,1);
+}
+.access-map-wrap:hover .map-placeholder { transform: scale(1.035); }
+
+/* ── リップル効果 ── */
+.btn .ripple {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,.28);
+  transform: scale(0);
+  animation: ripple-anim .55s linear;
+  pointer-events: none;
+}
+@keyframes ripple-anim { to { transform: scale(5); opacity: 0; } }
+
+/* ── ロゴホバー ── */
+.nav-logo { transition: opacity .3s ease, transform .3s ease; }
+.nav-logo:hover .logo-img { opacity: .75 !important; }
+
+/* ── スクロールインジケーター追加 ── */
+@keyframes bounceArrow {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+.hero-scroll { animation: fadeIn 1s 1.8s ease both; }
+.hero-scroll span { animation: pulse 2.8s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .float-deco, .sweets-feature-img::before,
+  #cursor, #progress-bar { display: none !important; }
+  .exp-spec, .section-ornament::before,
+  .section-ornament::after,
+  .section-ornament-dot { transition: none !important; transform: none !important; opacity: 1 !important; }
+}
 </style>
 </head>
 <body>
+
+<!-- カスタムカーソル -->
+<div id="cursor"><div id="cursor-dot"></div><div id="cursor-ring"></div></div>
+<!-- プログレスバー -->
+<div id="progress-bar"></div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -919,6 +1257,31 @@ body {
 
 <!-- HERO -->
 <section id="hero">
+  <!-- 浮遊装飾 -->
+  <div class="float-deco fa" style="top:12%;left:8%;width:70px;color:#D4A858;">
+    <svg viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="30" cy="48" rx="18" ry="20" fill="currentColor" opacity=".18"/>
+  <path d="M22 48 Q30 18 38 48" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".25"/>
+  <path d="M16 44 Q30 10 44 44" stroke="currentColor" stroke-width="1" fill="none" opacity=".15"/>
+  <ellipse cx="30" cy="51" rx="10" ry="9" fill="currentColor" opacity=".28"/>
+</svg>
+  </div>
+  <div class="float-deco fb" style="top:55%;left:3%;width:45px;color:#C89840;opacity:.6;">
+    <svg viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="30" cy="48" rx="18" ry="20" fill="currentColor" opacity=".18"/>
+  <path d="M22 48 Q30 18 38 48" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".25"/>
+  <path d="M16 44 Q30 10 44 44" stroke="currentColor" stroke-width="1" fill="none" opacity=".15"/>
+  <ellipse cx="30" cy="51" rx="10" ry="9" fill="currentColor" opacity=".28"/>
+</svg>
+  </div>
+  <div class="float-deco fc" style="top:25%;right:5%;width:55px;color:#D4A858;opacity:.5;">
+    <svg viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="30" cy="48" rx="18" ry="20" fill="currentColor" opacity=".18"/>
+  <path d="M22 48 Q30 18 38 48" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".25"/>
+  <path d="M16 44 Q30 10 44 44" stroke="currentColor" stroke-width="1" fill="none" opacity=".15"/>
+  <ellipse cx="30" cy="51" rx="10" ry="9" fill="currentColor" opacity=".28"/>
+</svg>
+  </div>
   <div class="hero-left">
     <p class="hero-eyebrow">RYOHEIDOU CAFÉ — ENA, GIFU</p>
     <h1 class="hero-title">
@@ -956,6 +1319,7 @@ body {
   <div class="concept-inner">
     <div class="concept-text reveal from-left">
       <p class="eyebrow">ABOUT RYOHEIDOU</p>
+      <div class="section-ornament reveal"><div class="section-ornament-dot"></div></div>
       <h2 class="title-serif">栗と向き合い続ける、<br><em>小さなカフェ</em>の話。</h2>
       <p class="body-text">岐阜県恵那市は、日本有数の栗の産地です。良平堂カフェは、その恵那の栗だけを使い、スイーツ・体験・物販を通じて、栗文化の豊かさをお届けしています。</p>
       <p class="body-text">観光の途中にふらりと立ち寄って、ひとつのスイーツと静かな時間を。ここにしかない味と体験が、あなたの旅の記憶になります。</p>
@@ -1129,6 +1493,7 @@ body {
     <div class="tour-intro reveal">
       <div class="tour-intro-text">
         <p class="eyebrow">FOR TRAVEL AGENCIES</p>
+      <div class="section-ornament reveal"><div class="section-ornament-dot"></div></div>
         <div class="section-divider reveal"></div>
         <h2 class="title-serif">旅行会社・バス会社様へ</h2>
       </div>
@@ -1182,6 +1547,7 @@ body {
     <div class="access-grid">
       <div class="reveal">
         <p class="eyebrow">ACCESS</p>
+      <div class="section-ornament reveal"><div class="section-ornament-dot"></div></div>
         <h2 class="title-serif" style="margin-bottom:2.5rem">アクセス</h2>
         <div class="info-rows">
           <div class="info-row"><span class="info-key">住所</span><span class="info-val">〒509-7201<br>岐阜県恵那市大井町2714-66</span></div>
@@ -1220,6 +1586,7 @@ body {
   <div class="contact-inner">
     <div class="reveal">
       <p class="eyebrow">CONTACT</p>
+      <div class="section-ornament reveal"><div class="section-ornament-dot"></div></div>
       <h2 class="title-serif">ご予約・<br><em>お問い合わせ</em></h2>
       <p class="contact-sub">体験のご予約、団体・ツアーのご相談など<br>お気軽にご連絡ください。</p>
     </div>
@@ -1351,6 +1718,74 @@ body {
     });
   }, { threshold: 0.5 });
   document.querySelectorAll('.section-divider').forEach(el => dividerObserver.observe(el));
+
+  // ── スクロール進捗バー ──
+  const progressBar = document.createElement('div');
+  progressBar.id = 'progress-bar';
+  document.body.prepend(progressBar);
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
+  // ── カスタムカーソル（PCのみ） ──
+  if (window.matchMedia('(pointer:fine)').matches) {
+    const dot  = document.createElement('div'); dot.className  = 'cursor-dot';
+    const ring = document.createElement('div'); ring.className = 'cursor-ring';
+    document.body.append(dot, ring);
+
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    window.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left  = mx + 'px'; dot.style.top  = my + 'px';
+      dot.style.opacity  = '1';
+      ring.style.opacity = '1';
+    });
+    // リングは少し遅れて追いかける
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+    // ホバー対象でリング拡大
+    document.querySelectorAll('a, button, .btn, .sweets-card, .exp-item, .tour-plan').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+    // ウィンドウ外でカーソル非表示
+    document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
+  }
+
+  // ── テキストリビール（セクションタイトルに適用） ──
+  document.querySelectorAll('.title-serif').forEach(el => {
+    el.classList.add('text-reveal');
+  });
+  const textRevealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        textRevealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.text-reveal').forEach(el => textRevealObserver.observe(el));
+
+  // ── スイーツカードに商品名オーバーレイを動的追加 ──
+  document.querySelectorAll('.sweets-card').forEach(card => {
+    const img = card.querySelector('.sweets-card-img');
+    const name = card.querySelector('.sweets-card-name');
+    if (img && name) {
+      const overlay = document.createElement('div');
+      overlay.className = 'sweets-card-img-overlay';
+      overlay.innerHTML = `<span>${name.textContent}</span>`;
+      overlay.style.cssText = 'position:absolute;inset:0;display:flex;align-items:flex-end;padding:.8rem;background:linear-gradient(to top,rgba(36,28,18,.55) 0%,transparent 60%);opacity:0;transition:opacity .35s ease;z-index:3;';
+      img.appendChild(overlay);
+      card.addEventListener('mouseenter', () => overlay.style.opacity = '1');
+      card.addEventListener('mouseleave', () => overlay.style.opacity = '0');
+    }
+  });
 </script>
 </body>
 </html>
