@@ -847,7 +847,45 @@ body {
   border-color: rgba(168,136,58,.35);
 }
 
-/* ── Map placeholder：ホバーでリンクが出てくる ── */
+/* ── 体験カード内ボタン ── */
+.exp-btn {
+  display: inline-block;
+  margin-top: 1.4rem;
+  font-size: .75rem;
+  letter-spacing: .14em;
+  padding: .75rem 1.8rem;
+}
+.btn-fill.exp-btn {
+  background: var(--gold);
+  color: var(--white);
+}
+.btn-fill.exp-btn:hover {
+  background: var(--gold-lt);
+  transform: translateY(-2px);
+}
+/* 開催時期外ボタン */
+.exp-btn-disabled {
+  background: var(--bg-warm);
+  color: var(--ink-muted);
+  border: 1px solid var(--border);
+  cursor: default;
+  pointer-events: none;
+}
+.exp-btn-disabled::after { display: none; }
+/* 開催時期外の案内 */
+.exp-notice {
+  margin-top: 1.2rem;
+  padding: .6rem .9rem;
+  background: rgba(168,136,58,.08);
+  border-left: 2px solid var(--gold);
+  font-size: .78rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+}
+.exp-notice-icon { flex-shrink: 0; font-size: .9rem; }
 .map-placeholder a {
   transition: letter-spacing .25s ease, opacity .25s ease;
 }
@@ -1053,6 +1091,7 @@ body {
             <div class="exp-spec"><div class="exp-spec-key">難易度</div><div class="exp-spec-val">やさしい</div></div>
             <div class="exp-spec"><div class="exp-spec-key">対象</div><div class="exp-spec-val">どなたでも</div></div>
           </div>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSenoHIuJiIz71qjdKbHJAkovQoVx4-VuE55wJ5COTsN-XGJCw/viewform" target="_blank" rel="noopener" class="btn btn-fill exp-btn">予約はこちら</a>
         </div>
       </div>
 
@@ -1074,12 +1113,12 @@ body {
             <div class="exp-spec"><div class="exp-spec-key">所要時間</div><div class="exp-spec-val">約30〜40分</div></div>
             <div class="exp-spec"><div class="exp-spec-key">対象</div><div class="exp-spec-val">どなたでも</div></div>
           </div>
+          <div class="exp-notice">
+            <span class="exp-notice-icon">🍂</span>現在は開催時期外です。秋（9〜10月頃）に実施予定です。
+          </div>
+          <a href="#contact" class="btn exp-btn exp-btn-disabled">受付準備中</a>
         </div>
       </div>
-    </div>
-    <div class="exp-cta reveal" style="transition-delay:.3s">
-      <p>体験のご予約はお電話またはメールにて</p>
-      <a href="#contact" class="btn btn-fill" style="background:var(--gold);margin-top:.5rem">予約・お問い合わせへ</a>
     </div>
   </div>
 </section>
