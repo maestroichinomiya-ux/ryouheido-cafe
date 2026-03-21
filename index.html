@@ -342,11 +342,27 @@ nav.scrolled .logo-dark  { opacity: 0; }
 .exp-img .photo-hint svg { width: 44px; opacity: .18; color: var(--gold-pale); }
 .exp-img .photo-hint p { font-size: .68rem; letter-spacing: .12em; color: rgba(255,255,255,.18); }
 .exp-tag {
-  position: absolute; top: 1.2rem; left: 1.2rem;
-  padding: .3rem .9rem; font-size: .6rem; letter-spacing: .14em;
+  position: absolute; top: 1rem; left: 1rem;
+  padding: .35rem 1rem;
+  font-size: .62rem; font-weight: 500; letter-spacing: .14em;
+  color: #fff;
+  border-radius: 2px;
+  /* 背景をソリッドにして文字を確実に見せる */
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  /* テキストの後ろにぼかし層 */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
-.exp-tag.all-season { background: rgba(120,100,60,.55); color: var(--gold-lt); }
-.exp-tag.autumn { background: rgba(168,126,58,.5); color: var(--gold-lt); }
+.exp-tag.all-season {
+  background: rgba(80, 68, 45, .88);
+  border: 1px solid rgba(200,160,80,.5);
+  color: #F0D898;
+}
+.exp-tag.autumn {
+  background: rgba(100, 55, 20, .88);
+  border: 1px solid rgba(210,140,70,.5);
+  color: #F5C87A;
+}
 .exp-body { padding: 1.5rem 1.8rem 2rem; }
 .exp-title {
   font-family: 'Noto Serif JP', serif;
